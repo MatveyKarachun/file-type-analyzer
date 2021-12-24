@@ -2,42 +2,32 @@ package analyzer.searchstrategies;
 
 public class Kmp implements SearchStrategy {
 
+    byte[] needle;
+    int[] p;//prefix function
+
     @Override
     public boolean search(byte[] haystack, byte[] needle) {
-
-        int[] p = prefixFunc(needle);
+        this.needle = needle;
+        prefixFunc();
 
         return false;
     }
 
-    private static int[] prefixFunc(byte[] seq) {
-
-        int[] p = new int[seq.length];
-        for (int i = 0; i < seq.length; i++) {
-            p[i] = pp(i, seq[i], seq, p);
+    private void prefixFunc() {
+        p = new int[needle.length];
+        p[0] = 0;
+        for (int i = 1; i < needle.length; i++) {
+            p[i] = longestBorderThatCanBeExtendedLength(i - 1, needle[i]) + 1;
         }
-
-        return p;
     }
 
-    private static int pp(int i, byte current, byte[] seq, int[] p) {
-        if (i == -1) {
-            return 0;
+    private int longestBorderThatCanBeExtendedLength(int ind, byte current) {
+        if (ind == -1) {
+            return - 1;
         }
-        if (i == 0) {
-            return 0;
+        if (needle[p[ind]] == current) {
+            return p[ind];
         }
-        if (seq[p[i - 1]] == current) {
-            return p[i - 1] + 1;
-        }
-        return pp(p[i - 1] - 1, current, seq, p);
-    }
-
-    public static void main(String[] args) {
-        byte[] dick = "abcdabefabcdabghabcdabq".getBytes();
-        int[] p = prefixFunc(dick);
-        for (int i : p) {
-            System.out.print(i + " ");
-        }
+        return longestBorderThatCanBeExtendedLength(p[ind] - 1, current);
     }
 }
