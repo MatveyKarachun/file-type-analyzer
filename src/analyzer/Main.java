@@ -2,10 +2,12 @@ package analyzer;
 
 import analyzer.searchstrategies.SearchStrategy;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println(new File("").getAbsolutePath());
         String algorithmName = args[0];
         String relativePath = args[1];
         String pattern = args[2];
@@ -18,6 +20,6 @@ public class Main {
             e.printStackTrace();
         }
         long elapsedNanos = System.nanoTime() - startTime;
-        System.out.println("It took " + (elapsedNanos / 1000_000_000) + " seconds");
+        System.out.println("It took " + ((double) elapsedNanos / 1000_000_000) + " seconds");
     }
 }

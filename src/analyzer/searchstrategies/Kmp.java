@@ -17,6 +17,7 @@ public class Kmp implements SearchStrategy {
                     } else {
                         shift = j - p[j - 1];
                     }
+                    break;
                 } else if (j == needle.length - 1) {
                     return true;
                 }
