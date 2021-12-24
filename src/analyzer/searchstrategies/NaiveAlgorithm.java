@@ -5,7 +5,7 @@ class NaiveAlgorithm implements SearchStrategy {
     @Override
     public boolean search(byte[] haystack, byte[] needle) {
 
-        for (int i = 0; i < haystack.length - needle.length; i++) {
+        for (int i = 0; i < haystack.length - needle.length + 1; i++) {
             if (haystack[i] == needle[0]) {
                 for (int j = 1; j < needle.length; j++) {
                     if (needle[j] != haystack[i + j]) {

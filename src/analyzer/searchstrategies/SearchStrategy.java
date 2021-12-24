@@ -8,7 +8,7 @@ public interface SearchStrategy {
         if ("--naive".equals(name)) {
             return new NaiveAlgorithm();
         } else {
-            return null;
+            return new Kmp();
         }
     }
 }
