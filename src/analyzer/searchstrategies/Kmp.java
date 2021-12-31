@@ -7,8 +7,10 @@ public class Kmp implements SearchStrategy {
 
     @Override
     public boolean search(byte[] haystack, byte[] needle) {
+
         this.needle = needle;
         calculatePrefixFunc();
+
         for (int i = 0, shift = 1; i < haystack.length - needle.length + 1; i += shift) {
             for (int j = 0; j < needle.length; j++) {
                 if (haystack[i + j] != needle[j]) {
@@ -23,6 +25,7 @@ public class Kmp implements SearchStrategy {
                 }
             }
         }
+
         return false;
     }
 

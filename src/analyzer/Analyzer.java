@@ -8,15 +8,17 @@ import java.nio.file.Path;
 
 public class Analyzer {
 
-    public static String analyze(String filePath, String pattern, String fileType, SearchStrategy strategy) throws IOException {
+    public static String analyze(String filePathStr, String pattern, String fileType, SearchStrategy strategy) throws IOException {
 
         byte[] patternBytes = pattern.getBytes();
-        byte[] fileBytes = Files.readAllBytes(Path.of(filePath));
+        Path filePath = Path.of(filePathStr);
+        byte[] fileBytes = Files.readAllBytes(filePath);
 
+        String result = filePath.getFileName().toString() + ": ";
         if (strategy.search(fileBytes, patternBytes)) {
-            return fileType;
+            return result + fileType;
         } else {
-            return "Unknown file type";
+            return result + "Unknown file type";
         }
     }
 }
