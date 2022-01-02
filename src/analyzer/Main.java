@@ -34,5 +34,6 @@ public class Main {
         for (Future<String> f : futures) {
             System.out.println(f.get());
         }
+        executor.shutdown();
     }
 }
