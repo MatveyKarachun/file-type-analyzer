@@ -9,6 +9,7 @@ public class Kmp implements SearchStrategy {
     public boolean search(byte[] haystack, byte[] needle) {
 
         this.needle = needle;
+
         calculatePrefixFunc();
 
         for (int i = 0, shift = 1; i < haystack.length - needle.length + 1; i += shift) {
@@ -35,6 +36,7 @@ public class Kmp implements SearchStrategy {
         for (int i = 1; i < needle.length; i++) {
             p[i] = longestBorderThatCanBeExtendedLength(i - 1, needle[i]) + 1;
         }
+
     }
 
     private int longestBorderThatCanBeExtendedLength(int ind, byte current) {

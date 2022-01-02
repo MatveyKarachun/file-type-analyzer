@@ -23,12 +23,11 @@ public class Main {
         }
         File testFilesDir = new File(args[0]);
         File[] testFiles = testFilesDir.listFiles();
-        String algorithmName = "--naive";
-        SearchStrategy strategy = SearchStrategy.createStrategy(algorithmName);
+        String algorithmName = "--KMP";
         ExecutorService executor = Executors.newFixedThreadPool(testFiles.length);
         List<Callable<String>> callables = new ArrayList<>(testFiles.length);
         for (File file : testFiles) {
-            callables.add(() -> Analyzer.analyze(file.getAbsolutePath(), filePatterns, strategy));
+            callables.add(() -> Analyzer.analyze(file.getAbsolutePath(), filePatterns, SearchStrategy.createStrategy(algorithmName)));
         }
         List<Future<String>> futures = executor.invokeAll(callables);
         for (Future<String> f : futures) {
